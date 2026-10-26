@@ -13,7 +13,7 @@
 
 包含四次失败输入在内，累计 **3,833,704** 条已确认输入的归档、分类和来源对账完整；**6,538** 个指标键、**646,242** 条转化关联与独立 oracle 完全一致。该 [最终对账](evidence/operations/final-reconciliation.json)是全历史检查，和负载 prefix 的可见性测量分开。
 
-当前运行代码的 [成功云端 CI](https://github.com/JDinSeattle/AdPulse/actions/runs/34075884766)在默认资源配置上完成真实完整栈、回放、查询预算、大参数批次、实际 worker 中断和 sink 提交前崩溃；[报告及下载 artifact hash](evidence/operations/cloud-ci-latest.json)保留原始计数。worker 回到 RUNNING 为 20.212 秒，业务对账 41.332 秒；sink 故障实际退出码 77，恢复后累计 340 条输入业务结果一致。不是托管数据库、跨宿主机部署或生产服务。
+当前运行代码的 [成功云端 CI](https://github.com/simon-jd/AdPulse/actions/runs/34075884766)在默认资源配置上完成真实完整栈、回放、查询预算、大参数批次、实际 worker 中断和 sink 提交前崩溃；[报告及下载 artifact hash](evidence/operations/cloud-ci-latest.json)保留原始计数。worker 回到 RUNNING 为 20.212 秒，业务对账 41.332 秒；sink 故障实际退出码 77，恢复后累计 340 条输入业务结果一致。不是托管数据库、跨宿主机部署或生产服务。
 
 四次失败/早停、一次云端故障目标选择失败均保留，不能改写为成功容量指标。30 分钟输入未覆盖 26 小时状态保留周期；真实跨物理机/可用区故障、云服务部署与账单、生产 SLA 仍未验证。
 
@@ -69,7 +69,7 @@ Bloom 修改后的第二次输入仍出现下游积压，572.695 秒时停止；
 
 ## 云端边界
 
-公共仓库 [JDinSeattle/AdPulse](https://github.com/JDinSeattle/AdPulse) 已建立；[首次 GitHub Actions](https://github.com/JDinSeattle/AdPulse/actions/runs/34072376249) 成功，运行于 GitHub 托管的 4-CPU Linux runner。固定 actions SHA、Python 3.12 / Java 17，执行锁定依赖、完整 Docker 链路、独立回放、真实查询预算、worker 故障并上传 artifact。[下载核验后的证据](evidence/operations/cloud-ci-initial.json)包含 198 条初始对账及故障后累计 278 条对账；worker 19.347 秒回到 RUNNING、42.982 秒完成业务对账。启动和故障期间确有失败 checkpoint，报告保留原计数。该 run 对应初始公开 commit；后续修改需要其自己的 CI 结果。
+公共仓库 [simon-jd/AdPulse](https://github.com/simon-jd/AdPulse) 已建立；[首次 GitHub Actions](https://github.com/simon-jd/AdPulse/actions/runs/34072376249) 成功，运行于 GitHub 托管的 4-CPU Linux runner。固定 actions SHA、Python 3.12 / Java 17，执行锁定依赖、完整 Docker 链路、独立回放、真实查询预算、worker 故障并上传 artifact。[下载核验后的证据](evidence/operations/cloud-ci-initial.json)包含 198 条初始对账及故障后累计 278 条对账；worker 19.347 秒回到 RUNNING、42.982 秒完成业务对账。启动和故障期间确有失败 checkpoint，报告保留原计数。该 run 对应初始公开 commit；后续修改需要其自己的 CI 结果。
 
 大批次调优还触发了真实的 HTTP 参数边界：旧的整批 route-key 参数被 ClickHouse 拒绝为 `Field value too long`，sink 保持批次并停止提交消费位点。[拒绝证据](evidence/operations/sink-large-parameter-rejected.json)保留。`storage.lookup_parameters` 对校验身份去重，并按 JSON 转义后 UTF-8 字节数限制每个参数最多 64 KiB；写入仍按 2,000 条消息成批，逐 offset 哈希及 key/partition 冲突检查全部保留。[真实 ClickHouse 大批次回归](evidence/operations/sink-large-batch.json)复现 384,001 字节旧参数拒绝，验证 6 个最大 65,473 字节参数、2,000 条逻辑结果/投递身份、相同批次重试、冲突内容与分区变更拒绝。该脚本使用合成 Kafka 消息元数据，实际 broker 位点故障由独立 sink-replay 演练覆盖。完整本地回归为 **60 Python + 10 Java = 70** 项；原生 RocksDB 在 Java 项内。
 

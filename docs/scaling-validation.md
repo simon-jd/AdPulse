@@ -104,7 +104,7 @@ CPU affinity 必须按实际机器可用 CPU 调整并记录，不会因设置�
 
 本机 `make verify` 通过 **81 Python + 10 Java = 91** 项；[验证记录](evidence/scaling/verification.json)保留命令和日志 hash。一次受限沙箱的 ASGI TestClient 停滞已中断，不计为成功；允许本地连接后完整验证通过。Starlette TestClient 弃用和 Maven shade 重叠警告仍存在。
 
-最终代码提交 `b184d5f435b5cec09b79dff528845fca14b04fd8` 的 [GitHub Actions](https://github.com/JDinSeattle/AdPulse/actions/runs/34082912455) 已成功。下载核验了 11 份环境/验收报告，并将当前 80 份运行、测试、监控与部署源文件和该提交逐字节比较；[证据汇总](evidence/scaling/cloud-ci.json)包含原报告、hash、91 项回归、真实完整栈核对、索引 HTTP、故障/过期返回、字段投影、回放、分页预算、worker SIGKILL 和 sink 提交前崩溃恢复。后续文档/证据提交不改变这些运行源文件。该环境是托管 runner 上的 Docker 集成，不是托管云业务服务。
+最终代码提交 `b184d5f435b5cec09b79dff528845fca14b04fd8` 的 [GitHub Actions](https://github.com/simon-jd/AdPulse/actions/runs/34082912455) 已成功。下载核验了 11 份环境/验收报告，并将当前 80 份运行、测试、监控与部署源文件和该提交逐字节比较；[证据汇总](evidence/scaling/cloud-ci.json)包含原报告、hash、91 项回归、真实完整栈核对、索引 HTTP、故障/过期返回、字段投影、回放、分页预算、worker SIGKILL 和 sink 提交前崩溃恢复。后续文档/证据提交不改变这些运行源文件。该环境是托管 runner 上的 Docker 集成，不是托管云业务服务。
 
 完整数据核对也可以直接施加本次的容器预算：
 
