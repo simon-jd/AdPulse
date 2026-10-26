@@ -2,7 +2,7 @@
 
 > 本文保留原轮次的历史结果与当时限制。后续运行时迁移、长测、三 broker 故障和录屏状态见 [运维验收](operations-validation.md)。
 
-本次更新增加有界结果 API、固定 release 的签名游标、查询预算 / 监控和 HTTP 依赖维护。需求与取舍见[研究记录](market-and-technology-2026-09-06.md)，接口变更见[迁移说明](query-api.md)。原来的 [0.1.0 验收记录](validation.md) 作为历史证据保留，没有覆盖其失败样本或改变短测口径。
+本次更新增加有界结果 API、固定 release 的签名游标、查询预算 / 监控和 HTTP 依赖维护。接口变更见[迁移说明](query-api.md)。原来的 [0.1.0 验收记录](validation.md) 作为历史证据保留，没有覆盖其失败样本或改变短测口径。
 
 ## 已执行
 
@@ -49,5 +49,3 @@ make query-benchmark RELEASE=replay-verified-20260906
 - Flink 1.20.3、Kafka 3.9.0、Debezium 3.0.8、ClickHouse 24.8 仍是原本地链路版本。ClickHouse 24.8 已超官方 LTS 支持窗口；本次没有声称全栈已维护到生产安全基线。
 - 两条 TestClient / anyio 弃用提示保留；hosted CI 尚未运行。
 - 没有新增 30–60 分钟稳态、26 小时容量、多 broker / 宿主机容错、云部署 / 账单、真实广告流量或 GPU / 模型 serving 证据。旧 1000 events/s、P95 25.26 秒仍只是一分钟短测。
-
-经历库仅写入上述可支持事实、英文 bullets、指标来源和面试边界；新增稳定项目 ID `project-local-adpulse`，不把本地 portfolio 项目转为工作经历。

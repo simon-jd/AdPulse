@@ -12,7 +12,7 @@
 
 官方文档于 2026-09-06/07 访问：[SQLite 缓存和临时存储](https://www.sqlite.org/pragma.html)、[WAL 单写者与读快照](https://www.sqlite.org/wal.html)、[Docker 资源限制](https://docs.docker.com/engine/containers/resource_constraints/)、[ClickHouse 查询资源限制](https://clickhouse.com/docs/operations/settings/query-complexity)。使用 Python 标准库 SQLite，接受额外磁盘和序列化成本；page cache 配置不是进程硬限制，实验另以 Docker cgroup 约束。
 
-当前改动延续 [官方早期岗位样本与项目覆盖分析](market-and-technology-2026-09-06.md)：优先用可复现的资源约束、失败处理和数据核对展示 Backend / Cloud Infrastructure 能力。没有新增模型服务或 Kubernetes，也没有因热度引入新依赖。已完成的结果如下；未通过的尝试单独保留。
+当前改动优先补充可复现的资源约束、失败处理和数据核对，没有新增模型服务或 Kubernetes，也没有因热度引入新依赖。已完成的结果如下；未通过的尝试单独保留。
 
 ## 实现与一致性边界
 

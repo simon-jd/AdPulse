@@ -1,10 +1,9 @@
 {
   "date": "2026-10-04",
-  "scope": "Current local regression, separate from the experience-bank cloud measurements",
+  "scope": "Current local regression, separate from the cloud measurements in the README",
   "passed": 83,
   "skipped": 0,
   "failed": 0,
-  "cloud_results": "experience-bank-results.json",
   "container_registry_repair": {
     "reason": "GitHub Actions could not pull the pinned MinIO image from Docker Hub; the same Quay tag was also unavailable.",
     "release": "RELEASE.2025-04-22T22-12-26Z",
